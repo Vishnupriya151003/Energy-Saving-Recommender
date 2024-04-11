@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Usage Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f5f8;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        header, footer {
+            text-align: center;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 0;
+            border-radius: 8px 8px 0 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px 0;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        /* Highlighted section styling */
+        .highlight-section {
+            background-color: #e9f5ff; /* Light blue background */
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .highlight-section h2 {
+            color: #007bff; /* Blue text color for heading */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Energy Usage Results</h1>
+    </header>
+    <div class="container">
+        <div class="details">
+            <h2>Energy Usage Data:</h2>
+            <ul>
+                <li>Total kWh: {{ energy_data.total_kWh }}</li>
+                <li>Average Daily kWh: {{ energy_data.average_daily_kWh }}</li>
+                <li>Peak Hours: {{ energy_data.peak_hours }}</li>
+            </ul>
+        </div>
+
+        <h2>Energy Usage Pattern:</h2>
+        <img src="{{ url_for('static', filename='energy_plot.png') }}" alt="Energy Usage Pattern">
+        <p>This graph shows your energy usage pattern throughout the day.</p>
+        
+        <h2>Comparison with Low-Energy House:</h2>
+        <img src="{{ url_for('static', filename='energy_comparison_plot.png') }}" alt="Comparison with Low-Energy House">
+        <p>This graph compares your energy usage with that of a low-energy house.</p>
+
+        {% if suggestions %}
+        <div class="highlight-section">
+            <h2>Energy-Saving Suggestions:</h2>
+            <ul>
+                {% for suggestion in suggestions %}
+                    <li>{{ suggestion }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+    <footer>
+        <p>&copy; 2024 Energy Usage Results</p>
+    </footer>
+</body>
+</html>
